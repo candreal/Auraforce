@@ -1,0 +1,52 @@
+<aura:component controller="gameController"  implements="forceCommunity:availableForAllPageTypes" access="global">
+	<!-- This component switches between a list of search results and a detailed view of a particular list, depending on what the user clicks-->
+    
+    <!-- Attributes -->
+    <aura:attribute name="isSearch" type="Boolean" default="true"/>
+    <aura:attribute name="isListWant" type="Boolean" default="true"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="returnedGames" type="Game__c[]"/>
+    <aura:attribute name="wantList" type="Game__c[]"/>
+    <aura:attribute name="haveList" type="Game__c[]"/>
+    
+    <!-- registered events-->
+    <aura:registerEvent name="searchDone" type="c:gameSearchDoneEvent"/>
+    
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:gameSearchEvent" action="{!c.handleSearch}"/>
+    <aura:handler event="c:gameListViewWantEvent" action="{!c.handleViewWant}"/>
+    <aura:handler event="c:gameListViewHaveEvent" action="{!c.handleViewHave}"/>
+    
+    <aura:if isTrue="{!v.isSearch}">
+        <!-- if isSearch, the list of search results should be shown-->
+        <!-- datatable showing results-->
+        	<lightning:datatable columns="{!v.columns}"
+            	                 data="{!v.returnedGames}"
+            	                 keyField="id"
+                                 onrowaction="{!c.handleRowAction}"
+                	             aura:id="Table"
+                    	         hideCheckboxColumn="true"/>
+        <aura:set attribute="else">
+            <!-- if not isSearch, the detail view of the selected list should be shown-->
+            <aura:if isTrue="{!v.isListWant}">
+                <!-- If isListWant, show 'I Want' List details -->
+                <lightning:datatable columns="{!v.columns}"
+            	                 data="{!v.wantList}"
+            	                 keyField="id"
+                                 onrowaction="{!c.handleRowAction}"
+                	             aura:id="Table"
+                    	         hideCheckboxColumn="true"/>
+                <aura:set attribute="else">
+                    <!-- If not isListWant, show 'I Have' List details -->
+                    <lightning:datatable columns="{!v.columns}"
+            	                 data="{!v.haveList}"
+            	                 keyField="id"
+                                 onrowaction="{!c.handleRowAction}"
+                	             aura:id="Table"
+                    	         hideCheckboxColumn="true"/>
+                </aura:set>
+            </aura:if>
+        </aura:set>
+    </aura:if>
+</aura:component>

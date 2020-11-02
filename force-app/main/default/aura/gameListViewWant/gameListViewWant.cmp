@@ -1,0 +1,10 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    
+    <!-- Register to fire event on click-->
+    <aura:registerEvent name="wantView" type="c:gameListViewWantEvent"/>
+    
+    <!-- View Button -->
+    <div style="text-align: center; transform: translate(0, 50%);">
+		<lightning:button variant="brand" label="Games I Want" title="Brand action" onclick="{!c.handleClick}" />
+    </div>
+</aura:component>

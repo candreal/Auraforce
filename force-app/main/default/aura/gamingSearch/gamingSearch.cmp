@@ -1,0 +1,6 @@
+<aura:component >
+	
+    <!-- filter by platform: toggles that represent PC, PS4, XBox One, Nintendo Switch, Mobile-->
+    
+    <!-- most basic: input field and search button -->
+</aura:component>
