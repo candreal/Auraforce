@@ -32,4 +32,4 @@ Below are the basic steps to deploy this community to an org.
 8. In VS Code, run the command sfdx force:source:deploy or, from the command palette, run SFDX: Deploy Source to Org
 
 ## Usage
-Look for game portal in app launcher, then search for any game and click the action to add to want or have
+Look for MyGamesPortal in the app launcher, then search for any game and hit enter. Click an action next to any game to add the game to 'I Want' or 'I Have'
